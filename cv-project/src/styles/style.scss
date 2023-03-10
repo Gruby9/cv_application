@@ -1,0 +1,14 @@
+html {
+    background-color: dimgray;
+}
+
+.board {
+    display: flex;
+    justify-content: center;
+}
+
+.page {
+    height: 90vh;
+    width: 500px;
+    border: 3px solid black;
+}
