@@ -10,17 +10,22 @@ class EducationPopUp extends React.Component {
         }
 
         this.handleEducationChange = this.handleEducationChange.bind(this)
+        this.func = this.func.bind(this)
     }
 
     handleEducationChange(e) {
         this.setState({education: e.target.value})
     }
 
+    func() {
+
+    }
+
     render() {
         return (
             <div>
                 <p>Education</p>
-                <input type='text' onChange={this.handleEducationChange} />
+                <input type='text' onChange={this.props.func} />
                 <p>Experience</p>
                 <input type='text' />
                 <p>Skills</p>

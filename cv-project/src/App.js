@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import './styles/style.scss'
 import MainInfo from './components/mainInfo';
-import PopUpMainInfo from './components/popUpMainInfo';
+import MainInfoPopUp from './components/mainInfoPopUp';
 import Education from './components/education';
 import EducationPopUp from './components/educationPopUp'
 
@@ -14,16 +14,19 @@ class App extends React.Component {
       this.state = {
         on: false,
         onOne: false,
-        name: '',
-        phone: '',
-        email: ''
+        mainInfo: {
+          name: '',
+          phone: '',
+          email: '',
+        },
+        edu: ''
       }
     this.changeState = this.changeState.bind(this)
     this.changeStateOne = this.changeStateOne.bind(this)
     this.handleNameChange = this.handleNameChange.bind(this)
     this.handlePhoneChange = this.handlePhoneChange.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
-
+    this.getEdu = this.getEdu.bind(this)
 }
 
 changeState() {
@@ -45,49 +48,38 @@ changeStateOne() {
 }
 
 handleNameChange(e) {
-  this.setState({name: e.target.value})
+  this.setState({mainInfo: {name: e.target.value}})
 }
 
 handlePhoneChange(e) {
-  this.setState({phone: e.target.value})
-  console.log(e.target.value)
+  this.setState({mainInfo: {phone: e.target.value}})
 }
 
 handleEmailChange(e) {
-  this.setState({email: e.target.value})
+  this.setState({mainInfo: {email: e.target.value}})
+}
+
+getEdu(e) {
+  this.setState({edu : e.target.value})
+  console.log(e.education)
 }
 
   render() {
 
-    let info
-    if (this.state.on) {
-      info = 
-      <div>
-        <p>Name</p>
-        <input type='text' onChange={this.handleNameChange} />
-        <p>Phone number</p>
-        <input type='text' onChange={this.handlePhoneChange}/>
-        <p>E-mail</p>
-        <input type='text' onChange={this.handleEmailChange}/>
-        <button>Submit</button>
-      </div>
-    } 
-
-    let educationPopUp
-    if (this.state.onOne) {
-      educationPopUp = <EducationPopUp />
-    }
 
     return (
       <div className='board'>
         <div className='page'>
           <div className='sidebar'>
-            <MainInfo name={this.state.name} phone={this.state.phone} email={this.state.email}/>
+            <MainInfoPopUp name={this.handleNameChange} phone={this.handlePhoneChange} 
+              email={this.handleEmailChange} />
+            <MainInfo mainInfo={this.state.mainInfo}
+              // name={this.state.name} phone={this.state.phone} email={this.state.email}
+              />
             <button onClick={this.changeState}>Options</button>
-            {info}
             <button onClick={this.changeStateOne} >Options2</button>
-            {educationPopUp}
-            <Education />
+            <EducationPopUp func={this.getEdu}/>
+            <Education name={this.state.edu}/>
           </div>
           <div className='main'>
 
