@@ -1,35 +1,16 @@
 import React from "react";
 
 class EducationPopUp extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            education: '',
-            experience: '',
-            skills: ''
-        }
-
-        this.handleEducationChange = this.handleEducationChange.bind(this)
-        this.func = this.func.bind(this)
-    }
-
-    handleEducationChange(e) {
-        this.setState({education: e.target.value})
-    }
-
-    func() {
-
-    }
 
     render() {
         return (
-            <div>
-                <p>Education</p>
-                <input type='text' onChange={this.props.func} />
+            <div className="popUp">
+                <p className="firstElement">Education</p>
+                <input type='text' onChange={this.props.education} />
                 <p>Experience</p>
-                <input type='text' />
+                <input type='text' onChange={this.props.experience}/>
                 <p>Skills</p>
-                <input type='text' />
+                <input type='text' onChange={this.props.skills}/>
                 <button>Submit</button>
             </div>
         )

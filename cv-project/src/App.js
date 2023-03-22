@@ -14,12 +14,12 @@ class App extends React.Component {
       this.state = {
         on: false,
         onOne: false,
-        mainInfo: {
-          name: '',
-          phone: '',
-          email: '',
-        },
-        edu: ''
+        name: '',
+        phone: '',
+        email: '',
+        edu: '',
+        exp: '',
+        skills: ''
       }
     this.changeState = this.changeState.bind(this)
     this.changeStateOne = this.changeStateOne.bind(this)
@@ -27,6 +27,8 @@ class App extends React.Component {
     this.handlePhoneChange = this.handlePhoneChange.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.getEdu = this.getEdu.bind(this)
+    this.getExp = this.getExp.bind(this)
+    this.getSkills = this.getSkills.bind(this)
 }
 
 changeState() {
@@ -48,20 +50,27 @@ changeStateOne() {
 }
 
 handleNameChange(e) {
-  this.setState({mainInfo: {name: e.target.value}})
+  this.setState({name: e.target.value})
 }
 
 handlePhoneChange(e) {
-  this.setState({mainInfo: {phone: e.target.value}})
+  this.setState({phone: e.target.value})
 }
 
 handleEmailChange(e) {
-  this.setState({mainInfo: {email: e.target.value}})
+  this.setState({email: e.target.value})
 }
 
 getEdu(e) {
   this.setState({edu : e.target.value})
-  console.log(e.education)
+}
+
+getExp(e) {
+  this.setState({exp : e.target.value})
+}
+
+getSkills(e) {
+  this.setState({skills : e.target.value})
 }
 
   render() {
@@ -71,18 +80,18 @@ getEdu(e) {
       <div className='board'>
         <div className='page'>
           <div className='sidebar'>
-            <MainInfoPopUp name={this.handleNameChange} phone={this.handlePhoneChange} 
-              email={this.handleEmailChange} />
-            <MainInfo mainInfo={this.state.mainInfo}
-              // name={this.state.name} phone={this.state.phone} email={this.state.email}
-              />
-            <button onClick={this.changeState}>Options</button>
-            <button onClick={this.changeStateOne} >Options2</button>
-            <EducationPopUp func={this.getEdu}/>
-            <Education name={this.state.edu}/>
           </div>
           <div className='main'>
-
+          {this.state.on ? (<MainInfoPopUp name={this.handleNameChange} phone={this.handlePhoneChange} 
+            email={this.handleEmailChange} changeState={this.changeState}/>) : ('')}
+          <MainInfo name={this.state.name} phone={this.state.phone}
+            email={this.state.email}  />
+          <button onClick={this.changeState}>Options</button>
+          <button onClick={this.changeStateOne} >Options2</button>
+          {this.state.onOne ? (<EducationPopUp education={this.getEdu} experience={this.getExp} 
+            skills={this.getSkills} />) : ('')}  
+          <Education education={this.state.edu} experience={this.state.exp}
+            skills={this.state.skills} />
           </div>
         </div>
       </div>
